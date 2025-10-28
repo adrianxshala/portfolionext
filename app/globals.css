@@ -1,26 +1,798 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* AI Portfolio Dark Theme */
+    --background: 220 20% 6%;
+    --foreground: 0 0% 100%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Neon cyan accent */
+    --primary: 187 100% 50%;
+    --primary-foreground: 220 20% 6%;
+
+    /* Purple accent */
+    --secondary: 270 70% 65%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 0 0% 63%;
+
+    --accent: 187 100% 50%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 187 100% 50%;
+    --input: 220 15% 15%;
+    --ring: 187 100% 50%;
+
+    --radius: 1rem;
+
+    /* Custom AI theme colors */
+    --neon-cyan: 187 100% 50%;
+    --neon-purple: 270 70% 65%;
+    --space-black: 220 20% 4%;
+    --space-dark: 220 18% 8%;
+    --space-darker: 222 20% 11%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(187 100% 50%),
+      hsl(270 70% 65%)
+    );
+    --gradient-space: linear-gradient(
+      180deg,
+      hsl(220 20% 4%),
+      hsl(220 18% 8%),
+      hsl(222 20% 11%)
+    );
+    --gradient-card: linear-gradient(
+      135deg,
+      hsl(220 15% 10% / 0.6),
+      hsl(220 15% 10% / 0.3)
+    );
+
+    /* Glows and shadows */
+    --glow-cyan: 0 0 30px hsl(187 100% 50% / 0.5);
+    --glow-purple: 0 0 30px hsl(270 70% 65% / 0.5);
+    --glow-cyan-strong: 0 0 50px hsl(187 100% 50% / 0.8);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    background: var(--gradient-space);
+    font-family: "Exo 2", "Rajdhani", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes blink {
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+    height: 20px;
+  }
+  93%,
+  97% {
+    opacity: 0;
+    height: 2px;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    filter: brightness(1) drop-shadow(var(--glow-cyan));
+  }
+  50% {
+    filter: brightness(1.3) drop-shadow(var(--glow-cyan-strong));
+  }
+}
+
+@keyframes typing-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-800px);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes data-flow {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes data-flow-reverse {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes data-flow-horizontal {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-20px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(10px);
+  }
+}
+
+@keyframes circuit-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes neural-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes hologram {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes corner-glow {
+  0%,
+  100% {
+    opacity: 0.3;
+    box-shadow: 0 0 5px hsl(187 100% 50% / 0.3);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 15px hsl(187 100% 50% / 0.8);
+  }
+}
+
+@keyframes binary-flicker {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes binary-rain {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Utility classes */
+.gradient-text {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.glass-card {
+  background: var(--gradient-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(var(--neon-cyan) / 0.3);
+  border-radius: var(--radius);
+}
+
+.neon-glow {
+  box-shadow: var(--glow-cyan);
+}
+
+.neon-glow-strong {
+  box-shadow: var(--glow-cyan-strong);
+}
+
+/* Animation utility classes */
+.animate-data-flow {
+  animation: data-flow 2s ease-in-out infinite;
+}
+
+.animate-data-flow-reverse {
+  animation: data-flow-reverse 2.5s ease-in-out infinite;
+}
+
+.animate-data-flow-horizontal {
+  animation: data-flow-horizontal 3s ease-in-out infinite;
+}
+
+.animate-particle-float {
+  animation: particle-float 4s ease-in-out infinite;
+}
+
+.animate-circuit-pulse {
+  animation: circuit-pulse 2s ease-in-out infinite;
+}
+
+.animate-neural-pulse {
+  animation: neural-pulse 3s ease-in-out infinite;
+}
+
+.animate-hologram {
+  animation: hologram 4s ease-in-out infinite;
+}
+
+.animate-scan-line {
+  animation: scan-line 3s ease-in-out infinite;
+}
+
+.animate-corner-glow {
+  animation: corner-glow 2s ease-in-out infinite;
+}
+
+.animate-binary-flicker {
+  animation: binary-flicker 2s ease-in-out infinite;
+}
+
+.animate-binary-rain {
+  animation: binary-rain 4s linear infinite;
+}
+
+/* 3D Perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Futuristic Font Classes */
+.font-orbitron {
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.font-rajdhani {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.font-exo {
+  font-family: "Exo 2", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* Futuristic Text Effects */
+.text-futuristic {
+  font-family: "Orbitron", monospace;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    45deg,
+    hsl(187 100% 50%),
+    hsl(270 70% 65%),
+    hsl(187 100% 50%)
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.text-holographic {
+  font-family: "Exo 2", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px hsl(187 100% 50% / 0.5),
+    0 0 20px hsl(187 100% 50% / 0.3), 0 0 30px hsl(187 100% 50% / 0.1);
+  animation: holographic-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes holographic-glow {
+  0% {
+    text-shadow: 0 0 10px hsl(187 100% 50% / 0.5),
+      0 0 20px hsl(187 100% 50% / 0.3), 0 0 30px hsl(187 100% 50% / 0.1);
+  }
+  100% {
+    text-shadow: 0 0 20px hsl(187 100% 50% / 0.8),
+      0 0 30px hsl(187 100% 50% / 0.5), 0 0 40px hsl(187 100% 50% / 0.3);
+  }
+}
+
+/* Advanced Animations */
+@keyframes frosted-blur {
+  0%,
+  100% {
+    backdrop-filter: blur(10px);
+    background: rgba(34, 34, 34, 0.3);
+  }
+  50% {
+    backdrop-filter: blur(20px);
+    background: rgba(34, 34, 34, 0.5);
+  }
+}
+
+@keyframes liquid-morph {
+  0%,
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  25% {
+    border-radius: 70% 30% 70% 30% / 30% 70% 70% 30%;
+  }
+  50% {
+    border-radius: 30% 70% 30% 70% / 70% 70% 30% 30%;
+  }
+  75% {
+    border-radius: 70% 30% 30% 70% / 70% 30% 70% 30%;
+  }
+}
+
+@keyframes color-shift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes gradient-dance {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes ai-particle-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.5);
+    filter: blur(2px);
+  }
+}
+
+@keyframes micro-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes liquid-gradient {
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+@keyframes glass-refract {
+  0%,
+  100% {
+    backdrop-filter: blur(10px);
+    opacity: 0.8;
+  }
+  50% {
+    backdrop-filter: blur(25px);
+    opacity: 1;
+  }
+}
+
+@keyframes neural-network {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes morph-blob {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    transform: scale(1.1) rotate(120deg);
+  }
+  66% {
+    transform: scale(0.9) rotate(240deg);
+  }
+}
+
+@keyframes liquid-flow {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(300%) skewX(-15deg);
+  }
+}
+
+@keyframes magnetic-pull {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5px, -5px);
+  }
+}
+
+@keyframes tech-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes holographic-scan {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes glitch-effect {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* New utility classes */
+.animate-frosted-blur {
+  animation: frosted-blur 3s ease-in-out infinite;
+}
+
+.animate-liquid-morph {
+  animation: liquid-morph 8s ease-in-out infinite;
+}
+
+.animate-color-shift {
+  animation: color-shift 5s ease-in-out infinite;
+}
+
+.animate-gradient-dance {
+  animation: gradient-dance 5s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+.animate-ai-particle-pulse {
+  animation: ai-particle-pulse 2s ease-in-out infinite;
+}
+
+.animate-micro-bounce {
+  animation: micro-bounce 0.5s ease-in-out infinite;
+}
+
+.animate-shimmer-sweep {
+  animation: shimmer-sweep 2s linear infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(187, 255, 255, 0.3),
+    transparent
+  );
+  background-size: 200% 100%;
+}
+
+.animate-liquid-gradient {
+  animation: liquid-gradient 12s ease-in-out infinite;
+}
+
+.animate-glass-refract {
+  animation: glass-refract 4s ease-in-out infinite;
+}
+
+.animate-neural-network {
+  animation: neural-network 3s ease-in-out infinite;
+}
+
+.animate-morph-blob {
+  animation: morph-blob 10s ease-in-out infinite;
+}
+
+.animate-liquid-flow {
+  animation: liquid-flow 3s linear infinite;
+}
+
+.animate-magnetic-pull {
+  animation: magnetic-pull 2s ease-in-out infinite;
+}
+
+.animate-tech-scan {
+  animation: tech-scan 2s ease-in-out infinite;
+}
+
+.animate-data-stream {
+  animation: data-stream 3s linear infinite;
+}
+
+.animate-holographic-scan {
+  animation: holographic-scan 3s ease-in-out infinite;
+}
+
+.animate-glitch {
+  animation: glitch-effect 0.5s ease-in-out infinite;
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
