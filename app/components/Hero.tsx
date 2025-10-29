@@ -379,20 +379,20 @@ const Hero = () => {
 
             <motion.h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight sm:leading-tight"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              initial={{ y: 50, opacity: 0, filter: "blur(20px)" }}
+              animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 1, delay: 0.9 }}
             >
               <span className="text-futuristic">
                 {/* Mobile: Two lines */}
                 <span className="md:hidden">
-                  Full Stack Developer
-                  <br />
                   Ai Enhanced
+                  <br />
+                  Full Stack Developer
                 </span>
                 {/* Desktop: One line with separator */}
                 <span className="hidden md:inline">
-                  Full Stack Developer | Ai Enhanced
+                  Ai Enhanced Full Stack Developer
                 </span>
               </span>
             </motion.h1>

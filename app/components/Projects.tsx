@@ -19,7 +19,7 @@ const projects = [
   {
     title: "Ai Voice Assistant",
     description:
-      "Semantic search engine using embeddings and vector databases, enabling natural language queries across large document collections.",
+      "Voice assistant using react and openai api and voice recognition and text to speech",
     tags: ["React", "AI", "Vector DB", "NLP"],
     category: "AI/ML",
     status: "Live",

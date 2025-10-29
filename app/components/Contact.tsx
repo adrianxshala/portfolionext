@@ -59,21 +59,20 @@ const Contact = () => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "#",
+      href: "https://www.linkedin.com/in/adrian-shala-a80ba5198/",
       color: "hover:text-blue-400",
     },
-    { icon: Github, label: "GitHub", href: "#", color: "hover:text-gray-300" },
+    {
+      icon: Github,
+      label: "GitHub",
+      href: "https://github.com/adrianxshala",
+      color: "hover:text-gray-300",
+    },
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:contact@example.com",
+      href: "adrianxshalax@gmail.com",
       color: "hover:text-red-400",
-    },
-    {
-      icon: Twitter,
-      label: "Twitter",
-      href: "#",
-      color: "hover:text-blue-300",
     },
   ];
 
@@ -132,7 +131,7 @@ const Contact = () => {
 
         {/* Data Stream Lines */}
         <motion.div
-          className="absolute top-20 left-1/4 w-px h-20 bg-gradient-to-b from-primary/60 to-transparent"
+          className="absolute top-20 left-1/4 w-px h-20 bg-gradient-to-b from-primary/60 to-transparent blur-sm"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{ scaleY: 1, opacity: [0, 1, 0] }}
           transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
@@ -220,7 +219,7 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Contact Form */}
           <div className="relative">
-            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-2xl border border-primary/30 hover:border-primary/60">
+            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/40 to-background/20 backdrop-blur-[10px] border border-primary/30 hover:border-primary/60">
               {/* Liquid Morph Effect */}
               <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-3xl animate-liquid-morph" />
 
@@ -327,7 +326,7 @@ const Contact = () => {
           {/* Contact Info & Social Links */}
           <div className="space-y-8">
             {/* Contact Info */}
-            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-2xl border border-primary/30 hover:border-primary/60">
+            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/40 to-background/20 backdrop-blur-[40px] border border-primary/30 hover:border-primary/60">
               {/* Liquid Morph */}
               <motion.div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-primary/5 to-transparent rounded-3xl animate-liquid-gradient" />
 
@@ -354,7 +353,7 @@ const Contact = () => {
                         Email
                       </h4>
                       <p className="text-muted-foreground">
-                        contact@example.com
+                        adrianxshalax@gmail.com
                       </p>
                     </div>
                   </div>
@@ -375,7 +374,7 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-2xl border border-primary/30 hover:border-primary/60">
+            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/40 to-background/20 backdrop-blur-[40px] border border-primary/30 hover:border-primary/60">
               {/* Liquid Morph */}
               <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent rounded-3xl animate-liquid-gradient" />
 
