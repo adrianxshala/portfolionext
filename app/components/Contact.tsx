@@ -85,82 +85,98 @@ const Contact = () => {
       transition={{ duration: 1 }}
       viewport={{ once: true }}
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Floating Particles */}
+      {/* Futuristic Background Elements - Similar to Skills */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Floating Hexagons */}
         {isClient &&
-          [...Array(20)].map((_, i) => {
-            // Use deterministic values based on index to prevent hydration mismatch
-            const seed = i * 0.25;
+          [...Array(12)].map((_, i) => {
+            const seed = i * 0.3;
             const left = (Math.sin(seed) * 0.5 + 0.5) * 100;
             const top = (Math.cos(seed) * 0.5 + 0.5) * 100;
-            const xOffset = (Math.sin(seed * 2) * 0.5 + 0.5) * 100 - 50;
-            const yOffset = (Math.cos(seed * 2) * 0.5 + 0.5) * 100 - 50;
-            const duration = 4 + (Math.sin(seed * 3) * 0.5 + 0.5) * 2;
-            const delay = (Math.cos(seed * 4) * 0.5 + 0.5) * 3;
+            const duration = 4 + (Math.sin(seed * 2) * 0.5 + 0.5) * 2;
+            const delay = (Math.cos(seed * 3) * 0.5 + 0.5) * 2;
 
             return (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-primary rounded-full opacity-30"
+                className="absolute w-4 h-4 border border-primary/20 rotate-45"
                 style={{
                   left: `${left}%`,
                   top: `${top}%`,
                 }}
-                initial={{
-                  opacity: 0,
-                  scale: 0,
-                  x: 0,
-                  y: 0,
-                }}
                 animate={{
-                  opacity: [0, 0.3, 0],
-                  scale: [0, 1, 0],
-                  x: [0, xOffset],
-                  y: [0, yOffset],
+                  y: [0, -20, 0],
+                  rotate: [45, 225, 45],
+                  opacity: [0.2, 0.8, 0.2],
                 }}
                 transition={{
                   duration,
                   repeat: Infinity,
                   delay,
-                  ease: "easeInOut",
                 }}
               />
             );
           })}
 
+        {/* Circuit Pattern */}
+        <motion.div
+          className="absolute top-20 left-10 w-32 h-32 opacity-10"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
+            <rect
+              x="10"
+              y="10"
+              width="80"
+              height="80"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              opacity="0.3"
+            />
+            <circle cx="50" cy="30" r="2" fill="currentColor" opacity="0.5" />
+            <circle cx="50" cy="70" r="2" fill="currentColor" opacity="0.5" />
+            <line
+              x1="50"
+              y1="30"
+              x2="50"
+              y2="70"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              opacity="0.3"
+            />
+          </svg>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-20 right-10 w-24 h-24 opacity-10"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
+            <rect
+              x="10"
+              y="10"
+              width="80"
+              height="80"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              opacity="0.3"
+            />
+            <circle cx="30" cy="30" r="2" fill="currentColor" opacity="0.5" />
+            <circle cx="30" cy="70" r="2" fill="currentColor" opacity="0.5" />
+            <circle cx="70" cy="50" r="2" fill="currentColor" opacity="0.5" />
+          </svg>
+        </motion.div>
+
         {/* Data Stream Lines */}
         <motion.div
-          className="absolute top-20 left-1/4 w-px h-20 bg-gradient-to-b from-primary/60 to-transparent blur-sm"
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+          className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          animate={{ x: [-100, 100] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
-        <motion.div
-          className="absolute bottom-20 right-1/4 w-px h-16 bg-gradient-to-t from-secondary/60 to-transparent"
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{ scaleY: 1, opacity: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-        />
-
-        {/* Holographic Grid */}
-        <motion.div
-          className="absolute inset-0 opacity-5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.05 }}
-          transition={{ duration: 2 }}
-        >
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundImage: `
-                linear-gradient(hsl(187 100% 50% / 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, hsl(187 100% 50% / 0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </motion.div>
       </div>
 
       <div className="container mx-auto max-w-4xl relative z-10">
@@ -196,7 +212,7 @@ const Contact = () => {
             </motion.div>
           </motion.div>
           <motion.h2
-            className="text-5xl md:text-6xl font-bold text-futuristic mb-6"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-futuristic mb-6"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.7 }}
@@ -205,7 +221,7 @@ const Contact = () => {
             Let's Build Something Amazing
           </motion.h2>
           <motion.p
-            className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-exo"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-exo px-4"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
@@ -219,18 +235,13 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Contact Form */}
           <div className="relative">
-            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/40 to-background/20 backdrop-blur-[10px] border border-primary/30 hover:border-primary/60">
-              {/* Liquid Morph Effect */}
-              <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-3xl animate-liquid-morph" />
-
-              {/* AI Particle Pulse */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent animate-ai-particle-pulse opacity-30" />
-
-              {/* Shimmer Sweep */}
-              <div className="absolute inset-0 animate-shimmer-sweep pointer-events-none opacity-20" />
-
-              {/* Holographic Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-3xl animate-hologram" />
+            <div
+              className="glass-card p-8 rounded-3xl relative overflow-hidden group transition-all duration-500 backdrop-blur-md shadow-lg"
+              style={{
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              }}
+            >
 
               {/* Form Header */}
               <div className="relative z-10 mb-8">
@@ -326,14 +337,13 @@ const Contact = () => {
           {/* Contact Info & Social Links */}
           <div className="space-y-8">
             {/* Contact Info */}
-            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/40 to-background/20 backdrop-blur-[40px] border border-primary/30 hover:border-primary/60">
-              {/* Liquid Morph */}
-              <motion.div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-primary/5 to-transparent rounded-3xl animate-liquid-gradient" />
-
-              {/* Shimmer */}
-              <div className="absolute inset-0 animate-shimmer-sweep pointer-events-none opacity-20" />
-
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5 rounded-3xl animate-hologram" />
+            <div
+              className="glass-card p-8 rounded-3xl relative overflow-hidden group transition-all duration-500 backdrop-blur-md shadow-lg"
+              style={{
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              }}
+            >
 
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-6">
@@ -374,17 +384,13 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="glass-card p-8 neon-glow rounded-3xl relative overflow-hidden group hover:scale-105 transition-all duration-500 bg-gradient-to-br from-background/40 to-background/20 backdrop-blur-[40px] border border-primary/30 hover:border-primary/60">
-              {/* Liquid Morph */}
-              <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent rounded-3xl animate-liquid-gradient" />
-
-              {/* AI Particles */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent animate-ai-particle-pulse opacity-20" />
-
-              {/* Shimmer */}
-              <div className="absolute inset-0 animate-shimmer-sweep pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 rounded-3xl animate-hologram" />
+            <div
+              className="hidden md:block glass-card p-8 rounded-3xl relative overflow-hidden group transition-all duration-500 backdrop-blur-md shadow-lg"
+              style={{
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              }}
+            >
 
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-primary mb-6">

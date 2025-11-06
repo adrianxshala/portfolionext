@@ -9,12 +9,10 @@ import {
   Brain,
   Code,
   Sparkles,
-  Star,
   CircuitBoard,
   Network,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { WaveText } from "./animations";
 
 const skills = [
   {
@@ -92,7 +90,6 @@ const skills = [
 ];
 
 const Skills = () => {
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
 
@@ -230,7 +227,7 @@ const Skills = () => {
 
         {/* Category Filter */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="hidden md:flex justify-center gap-4 mb-12 overflow-x-auto"
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -244,7 +241,7 @@ const Skills = () => {
                   category.name === "All" ? null : category.name
                 )
               }
-              className={`px-6 py-3 rounded-full font-orbitron text-sm transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-orbitron text-sm transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                 selectedCategory === category.name ||
                 (category.name === "All" && !selectedCategory)
                   ? "bg-primary text-background shadow-lg shadow-primary/30"
@@ -264,128 +261,37 @@ const Skills = () => {
         </motion.div>
 
         {/* Skills Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          viewport={{ once: true }}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-16">
           {filteredSkills.map((skill, index) => (
-            <motion.div
+            <div
               key={skill.name}
-              className="group relative"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              onMouseEnter={() => setHoveredSkill(index)}
-              onMouseLeave={() => setHoveredSkill(null)}
+              className="group relative p-4 rounded-xl bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-xl border border-primary/20 hover:border-primary/40 transition-all duration-300"
             >
-              <motion.div
-                className="relative p-6 rounded-2xl bg-gradient-to-br from-background/60 to-background/30 backdrop-blur-2xl border border-primary/30 hover:border-primary/60 transition-all duration-500 h-full overflow-hidden"
-                whileHover={{
-                  scale: 1.05,
-                  rotateY: 5,
-                  boxShadow: "0 20px 40px rgba(0, 255, 255, 0.15)",
-                }}
-                style={{
-                  transformStyle: "preserve-3d",
-                }}
-              >
-                {/* Gradient Morph Effect */}
-                <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 animate-liquid-gradient opacity-50" />
-
-                {/* AI Particle Pulse Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent animate-ai-particle-pulse opacity-30" />
-
-                {/* Shimmer on Hover */}
-                <div className="absolute inset-0 animate-shimmer-sweep pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {/* Skill Icon */}
-                <motion.div
-                  className="relative mb-4"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+              {/* Skill Icon */}
+              <div className="flex flex-col items-center text-center space-y-2">
+                <div
+                  className={`w-12 h-12 rounded-lg bg-gradient-to-br ${skill.color} flex items-center justify-center shadow-md`}
                 >
-                  <motion.div
-                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${skill.color} flex items-center justify-center text-2xl mb-3 shadow-lg animate-magnetic-pull`}
-                    animate={{
-                      scale: [1, 1.05, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    whileHover={{
-                      scale: 1.15,
-                      rotate: [0, 5, -5, 0],
-                    }}
-                  >
-                    <motion.div
-                      whileHover={{ rotate: [0, 360], scale: 1.1 }}
-                      transition={{ duration: 0.8 }}
-                    >
-                      <skill.iconComponent className="w-8 h-8 text-white" />
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Floating Elements */}
-                  <motion.div
-                    className="absolute -top-2 -right-2 w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center"
-                    animate={{
-                      y: [0, -10, 0],
-                      opacity: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: index * 0.2,
-                    }}
-                  >
-                    <Star className="w-3 h-3 text-primary" />
-                  </motion.div>
-                </motion.div>
-
-                {/* Skill Info */}
-                <div className="space-y-3">
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground font-orbitron mb-1">
-                      <WaveText text={skill.name} delay={index * 0.05} />
-                    </h3>
-                    <p className="text-sm text-foreground/60 font-exo">
-                      {skill.description}
-                    </p>
-                  </div>
-
-                  {/* Experience */}
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-foreground/60 font-exo">
-                      Experience
-                    </span>
-                    <span className="text-primary font-orbitron font-bold">
-                      {skill.years}
-                    </span>
-                  </div>
+                  <skill.iconComponent className="w-6 h-6 text-white" />
                 </div>
 
-                {/* Hover Overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                />
-
-                {/* Corner Glow */}
-                <motion.div
-                  className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-2xl"
-                  animate={{ opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.div>
-            </motion.div>
+                {/* Skill Info */}
+                <div className="space-y-1 w-full">
+                  <h3 className="text-sm font-bold text-foreground font-orbitron">
+                    {skill.name}
+                  </h3>
+                  <p className="text-xs text-foreground/60 font-exo line-clamp-2 text-gray-400
+                  0">
+                    {skill.description}
+                  </p>
+                  <span className="text-xs text-primary font-orbitron font-semibold block">
+                    {skill.years}
+                  </span>
+                </div>
+              </div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </motion.section>
   );

@@ -74,7 +74,7 @@ const About = () => {
           return (
             <motion.div
               key={i}
-              className={`absolute ${color} rounded-full blur-[1px] animate-ai-particle-pulse`}
+              className={`absolute ${color} rounded-full blur-[1px]`}
               style={{
                 left: `${left}%`,
                 top: `${top}%`,
@@ -82,27 +82,27 @@ const About = () => {
                 height: `${size}px`,
               }}
               initial={{
-                opacity: 0,
-                scale: 0,
+                opacity: 0.25,
+                scale: 1,
                 x: 0,
                 y: 0,
               }}
               animate={{
-                opacity: [0, 0.8, 0.4, 0.8, 0],
-                scale: [0, 1.3, 0.9, 1.2, 0],
+                opacity: [0.25, 0.5, 0.75, 0.5, 0.25],
+                scale: [0.95, 1, 1.05, 1],
                 x: [
                   0,
-                  Math.round(Math.sin(seed * 2) * 120),
-                  Math.round(-Math.sin(seed * 2) * 100),
+                  Math.round(Math.sin(seed * 2) * 80),
+                  Math.round(-Math.sin(seed * 2) * 60),
                   0,
                 ],
                 y: [
                   0,
-                  Math.round(-Math.cos(seed * 2) * 120),
-                  Math.round(Math.cos(seed * 2) * 100),
+                  Math.round(-Math.cos(seed * 2) * 80),
+                  Math.round(Math.cos(seed * 2) * 60),
                   0,
                 ],
-                rotate: [0, 360],
+                rotate: [0, 20, 0],
               }}
               transition={{
                 duration:
@@ -110,6 +110,7 @@ const About = () => {
                     (10 + (Math.sin(seed * 3) * 0.5 + 0.5) * 6) * 100
                   ) / 100,
                 repeat: Infinity,
+                repeatType: "mirror",
                 delay:
                   Math.round((Math.cos(seed * 4) * 0.5 + 0.5) * 3 * 100) / 100,
                 ease: "easeInOut",
@@ -142,11 +143,12 @@ const About = () => {
                 transform: `rotate(${rotation}deg)`,
               }}
               animate={{
-                opacity: [0.1, 0.6, 0.1],
+                opacity: [0.15, 0.5, 0.3],
               }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
+                repeatType: "mirror",
                 delay: seed,
                 ease: "easeInOut",
               }}
@@ -159,23 +161,24 @@ const About = () => {
           className="absolute top-20 left-1/4 w-px h-32 bg-gradient-to-b from-primary via-cyan-500 to-transparent blur-[2px]"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{
-            scaleY: [0, 1, 0.8, 0],
-            opacity: [0, 0.8, 0.4, 0],
-            scale: [1, 1.2, 1],
+            scaleY: [0.2, 1, 0.8, 0.2],
+            opacity: [0.2, 0.7, 0.4, 0.2],
+            scale: [1, 1.1, 1],
           }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 3, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-20 right-1/4 w-px h-28 bg-gradient-to-t from-secondary via-purple-500 to-transparent blur-[2px]"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{
-            scaleY: [0, 1, 0.7, 0],
-            opacity: [0, 0.8, 0.4, 0],
-            scale: [1, 1.15, 1],
+            scaleY: [0.2, 1, 0.8, 0.2],
+            opacity: [0.2, 0.7, 0.4, 0.2],
+            scale: [1, 1.08, 1],
           }}
           transition={{
             duration: 3,
             repeat: Infinity,
+            repeatType: "mirror",
             delay: 0.5,
             ease: "easeInOut",
           }}
@@ -184,12 +187,13 @@ const About = () => {
           className="absolute top-1/2 left-1/3 w-px h-24 bg-gradient-to-b from-accent via-pink-500 to-transparent blur-[1.5px]"
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{
-            scaleY: [0, 1, 0.6, 0],
-            opacity: [0, 0.7, 0.3, 0],
+            scaleY: [0.2, 1, 0.7, 0.2],
+            opacity: [0.2, 0.6, 0.35, 0.2],
           }}
           transition={{
             duration: 2.5,
             repeat: Infinity,
+            repeatType: "mirror",
             delay: 1.2,
             ease: "easeInOut",
           }}
@@ -230,11 +234,12 @@ const About = () => {
           animate={{
             x: [0, 30, -20, 10, 0],
             y: [0, -40, 20, -10, 0],
-            scale: [1, 1.3, 0.8, 1.2, 1],
+            scale: [1, 1.2, 0.9, 1.1, 1],
           }}
           transition={{
             duration: 15,
             repeat: Infinity,
+            repeatType: "mirror",
             ease: "easeInOut",
           }}
         />
@@ -243,11 +248,12 @@ const About = () => {
           animate={{
             x: [0, -25, 15, -10, 0],
             y: [0, 35, -25, 15, 0],
-            scale: [1, 0.7, 1.5, 0.9, 1],
+            scale: [1, 0.85, 1.2, 0.95, 1],
           }}
           transition={{
             duration: 18,
             repeat: Infinity,
+            repeatType: "mirror",
             ease: "easeInOut",
           }}
         />
@@ -343,7 +349,7 @@ const About = () => {
             viewport={{ once: true }}
           >
             <motion.div
-              className="glass-card p-6 md:p-8 rounded-3xl neon-glow relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 animate-glass-refract"
+              className="glass-card p-6 md:p-8 rounded-3xl neon-glow relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 animate-glass-refract backdrop-blur-xl bg-white/5 border border-white/10"
               initial={{ y: 30, opacity: 0, rotateX: -10 }}
               whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -413,7 +419,7 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              className="glass-card p-6 md:p-8 rounded-3xl neon-glow relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 animate-glass-refract"
+              className="glass-card p-6 md:p-8 rounded-3xl neon-glow relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 animate-glass-refract backdrop-blur-xl bg-white/5 border border-white/10"
               initial={{ y: 30, opacity: 0, rotateX: -10 }}
               whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
               transition={{ duration: 0.8, delay: 1 }}

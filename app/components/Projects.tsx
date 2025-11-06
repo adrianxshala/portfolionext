@@ -1,7 +1,13 @@
 "use client";
 
-import { ExternalLink, Github, Sparkles, Bot } from "lucide-react";
-import { Button } from "./ui/button";
+import {
+  ExternalLink,
+  Github,
+  Sparkles,
+  Bot,
+  ArrowUpRight,
+  Rocket,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const projects = [
@@ -19,7 +25,7 @@ const projects = [
   {
     title: "Ai Voice Assistant",
     description:
-      "Voice assistant using react and openai api and voice recognition and text to speech",
+      "Voice assistant using next js, superbase and vercel ai sdk and voice recognition and text to speech",
     tags: ["React", "AI", "Vector DB", "NLP"],
     category: "AI/ML",
     status: "Live",
@@ -44,7 +50,7 @@ const Projects = () => {
   return (
     <motion.section
       id="projects"
-      className="relative py-20 px-4 md:px-8 lg:px-16 overflow-hidden"
+      className="relative py-12 md:py-20 px-4 sm:px-6 md:px-8 lg:px-16 overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -182,121 +188,168 @@ const Projects = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="inline-flex items-center gap-2 mb-4"
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Sparkles className="w-6 h-6 text-primary" />
+        <div className="text-center mb-8 md:mb-12 px-4">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <Sparkles className="w-5 h-5 text-primary" />
             <span className="text-primary font-orbitron text-sm tracking-wider">
               PORTFOLIO
             </span>
-            <Sparkles className="w-6 h-6 text-primary" />
-          </motion.div>
+            <Sparkles className="w-5 h-5 text-primary" />
+          </div>
 
-          <motion.h2
-            className="text-4xl md:text-6xl font-extrabold text-futuristic mb-6"
-            initial={{ scale: 0.8 }}
-            whileInView={{ scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-futuristic mb-3">
             Featured Projects
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className="text-lg md:text-xl text-foreground/70 font-exo max-w-3xl mx-auto"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
+          <p className="text-xs sm:text-sm md:text-base text-foreground/70 font-exo max-w-2xl mx-auto">
             Showcasing innovative solutions built with cutting-edge technologies
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Projects Grid */}
-        <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto px-4 sm:px-0">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="group relative"
-              initial={{ opacity: 0, y: 50 }}
+              className="group relative p-5 md:p-6 rounded-2xl bg-gradient-to-br from-background/70 to-background/40 backdrop-blur-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 h-full shadow-lg hover:shadow-xl hover:shadow-primary/10 cursor-pointer overflow-hidden"
+              onClick={() =>
+                project.demoUrl && window.open(project.demoUrl, "_blank")
+              }
+              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
+              {/* Animated Background Gradient */}
               <motion.div
-                className="relative p-5 rounded-xl bg-gradient-to-br from-background/80 to-background/50 backdrop-blur-xl border border-primary/30 hover:border-primary/60 transition-all duration-500 h-full shadow-lg hover:shadow-2xl overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="mb-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center shadow-lg`}
+                className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                animate={{
+                  backgroundPosition: ["0% 0%", "100% 100%"],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "linear",
+                }}
+                style={{
+                  backgroundSize: "200% 200%",
+                }}
+              />
+
+              {/* Floating Icon */}
+              <div className="flex flex-col h-full relative z-10">
+                <div className="flex items-start justify-between mb-4">
+                  <motion.div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center shadow-lg relative overflow-hidden`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <motion.div
+                      animate={{
+                        rotate: [0, 360],
+                      }}
+                      transition={{
+                        duration: 20,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"
+                    />
+                    <Bot className="text-white w-7 h-7 relative z-10" />
+                  </motion.div>
+
+                  {/* Animated Arrow Icon */}
+                  <motion.div
+                    className="text-primary/60 group-hover:text-primary"
+                    whileHover={{ scale: 1.2, rotate: 45 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <ArrowUpRight className="w-5 h-5" />
+                  </motion.div>
+                </div>
+
+                {/* Title with Animation */}
+                <motion.h3
+                  className="text-lg md:text-xl font-bold text-foreground font-orbitron mb-3 group-hover:text-primary transition-colors duration-300"
+                  whileHover={{ x: 5 }}
+                >
+                  {project.title}
+                </motion.h3>
+
+                {/* Description */}
+                <p className="text-sm text-foreground/70 font-exo leading-relaxed mb-4 flex-1 line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Tags with Hover Animation */}
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.tags.map((tag, tagIndex) => (
+                    <motion.span
+                      key={tagIndex}
+                      className="text-xs font-exo text-foreground/50 bg-background/50 px-2 py-0.5 rounded-md border border-primary/10"
+                      whileHover={{
+                        scale: 1.05,
+                        backgroundColor: "rgba(0, 255, 255, 0.1)",
+                      }}
+                      transition={{ type: "spring", stiffness: 400 }}
                     >
-                      <Bot className="text-white w-6 h-6" />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-orbitron text-primary bg-primary/15 px-2 py-1 rounded-full border border-primary/20">
-                        {project.category}
-                      </span>
-                      <span className="text-xs font-orbitron text-green-400 bg-green-400/15 px-2 py-1 rounded-full border border-green-400/20">
-                        {project.status}
-                      </span>
-                    </div>
+                      {tag}
+                    </motion.span>
+                  ))}
+                </div>
+
+                {/* Interactive Icons Row */}
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-primary/10">
+                  <div className="flex items-center gap-3">
+                    {project.demoUrl && (
+                      <motion.a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-primary/60 hover:text-primary"
+                        whileHover={{ scale: 1.2, rotate: -15 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </motion.a>
+                    )}
+                    {project.githubUrl && (
+                      <motion.a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-primary/60 hover:text-primary"
+                        whileHover={{ scale: 1.2, rotate: 15 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Github className="w-4 h-4" />
+                      </motion.a>
+                    )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-foreground font-orbitron mb-2">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-sm text-foreground/80 font-exo leading-relaxed">
-                    {project.description}
-                  </p>
+                  {/* Animated Rocket Icon */}
+                  <motion.div
+                    className="text-primary/40"
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Rocket className="w-4 h-4" />
+                  </motion.div>
                 </div>
-
-                <div className="flex gap-2">
-                  {project.demoUrl && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 font-orbitron text-xs hover:bg-primary hover:text-background transition-all duration-300 border-primary/30 hover:border-primary"
-                      onClick={() => window.open(project.demoUrl, "_blank")}
-                    >
-                      <ExternalLink className="w-3 h-3 mr-2" />
-                      View Live
-                    </Button>
-                  )}
-                  {project.githubUrl && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 font-orbitron text-xs hover:bg-primary hover:text-background transition-all duration-300 border-primary/30 hover:border-primary"
-                      onClick={() => window.open(project.githubUrl, "_blank")}
-                    >
-                      <Github className="w-3 h-3 mr-2" />
-                      Code
-                    </Button>
-                  )}
-                </div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </motion.section>
   );

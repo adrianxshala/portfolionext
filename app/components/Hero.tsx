@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Mail } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import ProfilePhoto from "./ProfilePhoto";
 import ThreeDBackground from "./ThreeDBackground";
@@ -420,11 +420,18 @@ const Hero = () => {
                 className="w-full sm:w-auto"
               >
                 <Button
-                  onClick={() => scrollToSection("projects")}
+                  onClick={() => {
+                    // Create a temporary link to download CV
+                    const link = document.createElement("a");
+                    link.href = "/Adrian_Shala_CV.pdf"; // Update this path to your actual CV file
+                    link.download = "Adrian_Shala_CV.pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
                   className="bg-primary text-background font-semibold px-6 py-4 sm:px-8 sm:py-6 text-sm sm:text-base hover:bg-primary/90 transition-all duration-300 w-full sm:w-auto"
                 >
-                  View My Work{" "}
-                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline" />
+                  CV <Download className="ml-2 w-4 h-4 sm:w-5 sm:h-5 inline" />
                 </Button>
               </motion.div>
               <motion.div
